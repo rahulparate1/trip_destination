@@ -44,10 +44,10 @@ export class TripVisualizerComponent {
   }
 
   getColor(trip: Trip): string {
-    if (trip.level === 2) return '#999'; // Gray arc
-    if (trip.start === 'BLR') return '#f5a623'; // Orange
-    if (trip.start === 'MAA') return '#007bff'; // Blue
-    if (trip.start === 'DEL') return '#5856d6'; // Purple
-    return '#888'; // Default
+    if (trip.level === 2) return '#999';
+    if (trip.start === 'BLR') return '#f5a623';
+    if (trip.start === 'MAA') return '#007bff';
+    if (trip.start === 'DEL') return '#5856d6';
+    return '#888';
   }
 }

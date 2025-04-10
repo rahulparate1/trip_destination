@@ -15,13 +15,11 @@
     </defs>
 
     <g *ngFor="let trip of trips; let i = index">
-      <!-- Start Dot -->
       <circle class="trip-dot"
               [attr.cx]="i * 120 + 20"
               cy="50"
               [attr.fill]="getColor(trip)" />
 
-      <!-- End Dot -->
       <circle class="trip-dot"
               [attr.cx]="(i + 1) * 120"
               cy="50"
@@ -29,19 +27,16 @@
               stroke="#999"
               stroke-width="1.5" />
 
-      <!-- Straight Line (no arrow) -->
       <line *ngIf="trip.level === 1 && !trip.continued"
             [attr.x1]="i * 120 + 20" y1="50"
             [attr.x2]="(i + 1) * 120" y2="50"
             stroke="#6c63ff" stroke-width="2" />
 
-      <!-- Continued Line (with arrow) -->
       <line *ngIf="trip.level === 1 && trip.continued"
             [attr.x1]="i * 120 + 20" y1="50"
             [attr.x2]="(i + 1) * 120" y2="50"
             stroke="#2196f3" stroke-width="2" marker-end="url(#arrow)" />
 
-      <!-- Arc (duplicate trip) -->
       <path *ngIf="trip.level === 2"
             [attr.d]="'M' + (i * 120 + 20) + ',50 C' + ((i * 120 + 50)) + ',20 ' + ((i + 1) * 120 - 30) + ',20 ' + ((i + 1) * 120) + ',50'"
             stroke="orange" fill="transparent" stroke-width="2" />

@@ -10,8 +10,8 @@ export class DashboardComponent {
 
   constructor(public router: Router) {}
 
-  // Navigate to the Todo List page
-  navigateToTodoList() {
+  // Navigate to the trip page
+  navigateToTrip() {
     this.router.navigate(['/trip/trip-list']);
   }
 
