@@ -1,0 +1,62 @@
+<div class="trip-container">
+  <h1 class="title">Trip Visualizer</h1>
+
+  <div class="controls">
+    <input [(ngModel)]="start" placeholder="Start (e.g. BLR)" maxlength="3" />
+    <input [(ngModel)]="end" placeholder="End (e.g. MAA)" maxlength="3" />
+    <button (click)="addTrip()">Add Trip</button>
+  </div>
+
+  <svg width="100%" height="200" class="trip-visual">
+    <defs>
+      <marker id="arrow" markerWidth="10" markerHeight="10" refX="5" refY="3" orient="auto" markerUnits="strokeWidth">
+        <path d="M0,0 L0,6 L9,3 z" fill="orange" />
+      </marker>
+    </defs>
+
+    <g *ngFor="let trip of trips; let i = index">
+      <!-- Start Dot -->
+      <circle class="trip-dot"
+              [attr.cx]="i * 120 + 20"
+              cy="50"
+              [attr.fill]="getColor(trip)" />
+
+      <!-- End Dot -->
+      <circle class="trip-dot"
+              [attr.cx]="(i + 1) * 120"
+              cy="50"
+              fill="white"
+              stroke="#999"
+              stroke-width="1.5" />
+
+      <!-- Straight Line (no arrow) -->
+      <line *ngIf="trip.level === 1 && !trip.continued"
+            [attr.x1]="i * 120 + 20" y1="50"
+            [attr.x2]="(i + 1) * 120" y2="50"
+            stroke="#6c63ff" stroke-width="2" />
+
+      <!-- Continued Line (with arrow) -->
+      <line *ngIf="trip.level === 1 && trip.continued"
+            [attr.x1]="i * 120 + 20" y1="50"
+            [attr.x2]="(i + 1) * 120" y2="50"
+            stroke="#2196f3" stroke-width="2" marker-end="url(#arrow)" />
+
+      <!-- Arc (duplicate trip) -->
+      <path *ngIf="trip.level === 2"
+            [attr.d]="'M' + (i * 120 + 20) + ',50 C' + ((i * 120 + 50)) + ',20 ' + ((i + 1) * 120 - 30) + ',20 ' + ((i + 1) * 120) + ',50'"
+            stroke="orange" fill="transparent" stroke-width="2" />
+
+      <text [attr.x]="i * 120 + 10" y="70"
+            [attr.fill]="trip.level === 2 ? 'orange' : '#6c63ff'">
+        {{ trip.start }} - {{ trip.end }}
+      </text>
+    </g>
+  </svg>
+</div>
+
+
+
+
+
+
+
